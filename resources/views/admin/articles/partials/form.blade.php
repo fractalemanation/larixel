@@ -13,7 +13,6 @@
 <br><input class="form-control" type="text" name="slug" placeholder="Автоматическая генерация" value="{{$article->slug or ""}}" readonly="readonly">
 <label for="">Родительская категория</label>
 <select class="form-control" name="categories[]" multiple="multiple">
-	<option value="0">-- без родительской категории --</option>
 	@include('admin.articles.partials.categories', ['categories' => $categories])
 </select>
 <label for="">Краткое описание</label>

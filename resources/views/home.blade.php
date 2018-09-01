@@ -15,7 +15,6 @@
                     @endif
 
                     You are logged in!
-                    <a class="text-center" href="{{route('admin.category.index')}}">AdminPanel</a>
                 </div>
             </div>
         </div>

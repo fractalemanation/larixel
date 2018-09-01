@@ -17,4 +17,12 @@ class Category extends Model
     public function children() {
     	return $this->hasMany(self::class, 'parent_id');//Один ко многим, 3-ий параметр по умолчанию id; self::class = 'App\Category'; hasOne('App\Phone', 'friend_id', 'id') - найти телефон друга; belongsTo('App\Friend', 'id', 'friend_id') - найти друга которому принадлежит телефон;
     }
+
+    public function articles() {
+    	return $this->morphedByMany('App\article', 'categoryable');//Обратная полиморфная связь, многие ко многим
+    }
+
+    public function scopeLastCategories($query, $count) {
+    	return $query->orderBy('created_at', 'desc')->take($count)->get();//take принимает переменную с количеством результатов
+    }
 }
