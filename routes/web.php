@@ -17,10 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
 	Route::get('/', 'DashboardController@dashboard')->name('admin.index');
 	Route::resource('/category', 'CategoryController', ['as'=>'admin']);
 	Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+	Route::group(['prefix' => 'user_managment', 'namespace' => 'UserManagment'], function () {
+		Route::resource('/user', 'UserController', ['as' => 'admin.user_managment']);
+	});
 });
+
+Route::get('/blog/category/{slug?}', 'BlogController@category')->name('category');// Фигурные собки означают что тут будет переменная, знак вопроса означает что переменной может и не быть
+Route::get('/blog/article/{slug?}', 'BlogController@article')->name('article');
+
+Route::get('/home', 'HomeController@index')->name('home');
